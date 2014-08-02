@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, BionicHeartUpdateStatus){
     }
 
     self.status = BionicHeartStatusStopped;
-    self.heartRate = 85.0;
+    self.heartRate = STARTING_HEART_RATE;
 
     return self;
 }
@@ -108,6 +108,7 @@ typedef NS_ENUM(NSUInteger, BionicHeartUpdateStatus){
 -(void)stop {
     self.status = BionicHeartStatusStopped;
     [self.timer invalidate];
+    self.timer = nil;
 
 }
 
@@ -128,10 +129,10 @@ typedef NS_ENUM(NSUInteger, BionicHeartUpdateStatus){
             }
 
             if(!success || error){
-                if([self.delegate respondsToSelector:@selector(didSaveBeatSuccess:error:)]){
-                    [self.delegate didSaveBeatSuccess:success error:error];
                     NSLog(@"Save Error: %@",[error localizedDescription]);
-                }
+            }
+            if([self.delegate respondsToSelector:@selector(didSaveBeat:success:error:)]){
+                [self.delegate didSaveBeat:sample success:success error:error];
             }
 
         }];
