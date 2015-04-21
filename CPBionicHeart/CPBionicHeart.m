@@ -71,7 +71,10 @@ typedef NS_ENUM(NSUInteger, BionicHeartUpdateStatus){
 
     [self.healthStore requestAuthorizationToShareTypes:permissionSet readTypes:permissionSet completion:^(BOOL success, NSError *error){
         if(!success){
-            NSLog(@"Warning - did you allow permission?");
+            NSLog(@"💓💓 Warning - did you allow permission?");
+        }
+        if (error) {
+            NSLog(@"💓💓 Error: %@", error);
         }
 
         self.permissions = [self authStatus];
