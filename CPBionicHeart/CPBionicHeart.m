@@ -128,7 +128,7 @@ typedef NS_ENUM(NSUInteger, BionicHeartUpdateStatus){
         
         [self.healthStore saveObject:sample withCompletion:^(BOOL success, NSError *error) {
             if(success ) {
-                NSLog(@"Sample: %@",sample.quantity);
+//                NSLog(@"Sample: %@",sample.quantity);
             }
 
             if(!success || error){
